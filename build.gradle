@@ -10,4 +10,5 @@ repositories {
 ext {
     xchange = '5.0.4'
     vertx = '4.0.0'
+    jackson = '2.12.0'
 }

@@ -9,10 +9,11 @@ import io.vertx.ext.web.RoutingContext;
 
 import java.nio.charset.StandardCharsets;
 
-public class StatuspageHttpServerV1 extends AbstractVerticle {
+import static org.merkle.peregrine.statuspage.Routes.PEREGRINE_STATUS_V1;
+import static org.merkle.peregrine.statuspage.Routes.PUBLISH_STATUS_V1;
+import static org.merkle.peregrine.statuspage.Routes.PUBLISH_STATUS_VERTX_V1;
 
-    private static final String PUBLISH_STATUS_V1 = "/v1/publishStatus";
-    private static final String PEREGRINE_STATUS_V1 = "/v1/peregrineStatus";
+public class StatuspageHttpServerV1 extends AbstractVerticle {
 
     @Override
     public void start() throws Exception {
@@ -38,7 +39,7 @@ public class StatuspageHttpServerV1 extends AbstractVerticle {
         routingContext.request().bodyHandler(bodyHandler -> {
             final String body = new String(bodyHandler.getBytes(), StandardCharsets.UTF_8);
             System.out.println(body);
-            vertx.eventBus().request(PUBLISH_STATUS_V1, body, event ->
+            vertx.eventBus().request(PUBLISH_STATUS_VERTX_V1, body, event ->
                     routingContext.response().end(event.result().body().toString()));
         });
     }

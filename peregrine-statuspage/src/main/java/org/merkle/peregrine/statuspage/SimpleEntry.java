@@ -8,6 +8,12 @@ public class SimpleEntry {
     public static void main(String[] args) {
 
         final Vertx vertx = Vertx.vertx();
+        vertx.deployVerticle(StatusConsumer.class.getName(), new DeploymentOptions()
+            .setWorker(true)
+            .setInstances(2), event -> {
+
+        });
+
         vertx.deployVerticle(StatuspageHttpServerV1.class.getName(), new DeploymentOptions()
             .setWorker(true)
             .setInstances(2), event -> {
