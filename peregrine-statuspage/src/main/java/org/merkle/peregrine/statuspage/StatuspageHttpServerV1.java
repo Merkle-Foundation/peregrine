@@ -1,5 +1,6 @@
 package org.merkle.peregrine.statuspage;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpServer;
@@ -7,6 +8,7 @@ import io.vertx.core.http.HttpServerResponse;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.RoutingContext;
 
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
 import static org.merkle.peregrine.statuspage.Routes.PEREGRINE_STATUS_V1;
@@ -14,6 +16,8 @@ import static org.merkle.peregrine.statuspage.Routes.PUBLISH_STATUS_V1;
 import static org.merkle.peregrine.statuspage.Routes.PUBLISH_STATUS_VERTX_V1;
 
 public class StatuspageHttpServerV1 extends AbstractVerticle {
+
+    private final ObjectMapper mapper = new ObjectMapper();
 
     @Override
     public void start() throws Exception {
@@ -28,19 +32,32 @@ public class StatuspageHttpServerV1 extends AbstractVerticle {
                 .listen(8122);
     }
 
-    private void peregrineUp(final RoutingContext routingContext) {
-        final HttpServerResponse response = routingContext.response();
-        response.putHeader("Content-Type", "application/json");
-        response.setStatusCode(200);
-        response.end("{ \"Peregrine\" : \"All Systems Operational\" }");
+    private void peregrineUp(final RoutingContext ctx) {
+        ctx.response()
+                .putHeader("Content-Type", "application/json")
+                .setStatusCode(200)
+                .end("{ \"Peregrine\" : \"All Systems Operational\" }");
     }
 
-    private void statusPubHandler(final RoutingContext routingContext) {
-        routingContext.request().bodyHandler(bodyHandler -> {
-            final String body = new String(bodyHandler.getBytes(), StandardCharsets.UTF_8);
-            System.out.println(body);
-            vertx.eventBus().request(PUBLISH_STATUS_VERTX_V1, body, event ->
-                    routingContext.response().end(event.result().body().toString()));
+    private void statusPubHandler(final RoutingContext ctx) {
+        ctx.request().bodyHandler(handler -> {
+            try {
+                final byte[] bytes = handler.getBytes();
+                mapper.readTree(bytes);
+                final String body = new String(bytes, StandardCharsets.UTF_8);
+                vertx.eventBus().publish(PUBLISH_STATUS_VERTX_V1, body);
+
+                ctx.response()
+                        .putHeader("Content-Type", "application/json")
+                        .setStatusCode(200)
+                        .end("{ \"Result\" : \"POST Message Consumed\" }");
+            } catch (IOException e) {
+                e.printStackTrace();
+                ctx.response()
+                        .putHeader("Content-Type", "application/json")
+                        .setStatusCode(500)
+                        .end("{ \"Result\" : \"POST Message Failed\" }");
+            }
         });
     }
 
