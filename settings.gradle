@@ -1,0 +1,4 @@
+rootProject.name = 'peregrine'
+include 'peregrine-statuspage'
+include 'peregrine-common'
+
