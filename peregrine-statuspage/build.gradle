@@ -2,7 +2,7 @@ plugins {
     id 'java'
 }
 
-group 'org.merklefoundation.peregrine'
+group 'org.merkle.peregrine'
 version '1.0-SNAPSHOT'
 
 repositories {
