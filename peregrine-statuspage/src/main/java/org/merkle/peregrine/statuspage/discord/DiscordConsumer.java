@@ -20,6 +20,7 @@ import static org.merkle.peregrine.statuspage.Routes.PUBLISH_STATUS_VERTX_V1;
 public class DiscordConsumer extends AbstractVerticle {
 
     private final ObjectMapper mapper = new ObjectMapper();
+
     private final Map<String, String> discordHook;
     private final HttpClient httpClient = HttpClient.newBuilder()
             .connectTimeout(Duration.ofSeconds(10))

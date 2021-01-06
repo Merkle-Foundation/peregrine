@@ -11,6 +11,8 @@ import io.vertx.ext.web.templ.freemarker.FreeMarkerTemplateEngine;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
+import static org.merkle.peregrine.statuspage.Routes.CREATE_SUBSCRIPTION_V1;
+import static org.merkle.peregrine.statuspage.Routes.CREATE_SUBSCRIPTION_VERTX_V1;
 import static org.merkle.peregrine.statuspage.Routes.PEREGRINE_WEB_ROOT;
 import static org.merkle.peregrine.statuspage.Routes.PEREGRINE_STATUS_V1;
 import static org.merkle.peregrine.statuspage.Routes.STATUS_PAGE_PUBLISH_V1;
@@ -28,8 +30,8 @@ public class StatuspageHttpServerV1 extends AbstractVerticle {
         final Router router = Router.router(vertx);
         router.route(HttpMethod.GET, PEREGRINE_WEB_ROOT).handler(this::peregrineWeb);
         router.route(HttpMethod.GET, PEREGRINE_STATUS_V1).handler(this::peregrineUp);
-        router.route(HttpMethod.GET, STATUS_PAGE_PUBLISH_V1).handler(this::statusPubHandler);
         router.route(HttpMethod.POST, STATUS_PAGE_PUBLISH_V1).handler(this::statusPubHandler);
+        router.route(HttpMethod.POST, CREATE_SUBSCRIPTION_V1).handler(this::createSubHandler);
 
         engine = FreeMarkerTemplateEngine.create(vertx);
         
@@ -67,6 +69,9 @@ public class StatuspageHttpServerV1 extends AbstractVerticle {
                 .end("{ \"Peregrine\" : \"All Systems Operational\" }");
     }
 
+    /**
+     * Handler for inbound messages posted from https://www.atlassian.com/software/statuspage
+     */
     private void statusPubHandler(final RoutingContext ctx) {
         System.out.println("Received request at: " + new Date());
 
@@ -74,7 +79,31 @@ public class StatuspageHttpServerV1 extends AbstractVerticle {
             final String body = new String(handler.getBytes(), StandardCharsets.UTF_8);
             System.out.println("Inbound statuspage message: " + body);
             vertx.eventBus().publish(PUBLISH_STATUS_VERTX_V1, body);
+
+            ctx.response()
+                    .putHeader("Content-Type", "application/json")
+                    .setStatusCode(200)
+                    .end("{ \"Result\" : \"POST Message Consumed\" }");
         });
     }
 
+    /**
+     * Handler for a user requested subscription to one of our topics
+     */
+    public void createSubHandler(final RoutingContext ctx) {
+        ctx.request().bodyHandler(handler -> {
+            final String body = new String(handler.getBytes(), StandardCharsets.UTF_8);
+            vertx.eventBus().request(CREATE_SUBSCRIPTION_VERTX_V1, body, event -> {
+                if (event.succeeded()) {
+                    ctx.response()
+                            .setStatusCode(200)
+                            .end(event.result().body().toString());
+                } else {
+                    ctx.response()
+                            .setStatusCode(500)
+                            .end(event.cause().getMessage());
+                }
+            });
+        });
+    }
 }

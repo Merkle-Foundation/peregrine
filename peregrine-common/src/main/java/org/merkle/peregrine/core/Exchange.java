@@ -22,4 +22,12 @@ public enum Exchange {
         }
         return null;
     }
+
+    public static Exchange getValue(final String exchange) {
+        try {
+            return Exchange.valueOf(exchange);
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }

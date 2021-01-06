@@ -4,6 +4,7 @@ import io.vertx.core.Vertx;
 import org.merkle.peregrine.core.PeregrineConfig;
 import org.merkle.peregrine.statuspage.discord.DiscordConsumer;
 import org.merkle.peregrine.statuspage.slack.SlackConsumer;
+import org.merkle.peregrine.statuspage.subscription.SubscriptionConsumer;
 
 import java.io.IOException;
 
@@ -17,6 +18,7 @@ public class SimpleEntry {
 
         vertx.deployVerticle(new SlackConsumer());
         vertx.deployVerticle(new DiscordConsumer(cfg.getDiscordHooks()));
+        vertx.deployVerticle(new SubscriptionConsumer());
         vertx.deployVerticle(new StatuspageHttpServerV1());
     }
 }
