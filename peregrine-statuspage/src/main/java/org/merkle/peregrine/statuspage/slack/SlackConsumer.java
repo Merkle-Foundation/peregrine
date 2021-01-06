@@ -12,7 +12,5 @@ public class SlackConsumer extends AbstractVerticle {
         vertx.eventBus().consumer(PUBLISH_STATUS_VERTX_V1, this::successResponse);
     }
 
-    private void successResponse(final Message<?> message) {
-        System.out.println("Slack consumer processed: " + message.body().toString());
-    }
+    private void successResponse(final Message<?> message) {}
 }
