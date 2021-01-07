@@ -48,6 +48,9 @@ public class DiscordConsumer extends AbstractVerticle {
                 }
                 final URI uri = URI.create(discordHook.get(statusPageId));
                 final DiscordMessageSimple discordMsg = buildDiscordMessage(msg, exchange);
+                if (discordMsg == null) {
+                    return;
+                }
                 postToDiscord(discordMsg.build(), uri);
             }
         } catch (InterruptedException | IOException e) {
@@ -77,8 +80,9 @@ public class DiscordConsumer extends AbstractVerticle {
                     builder.setBody(latestUpdate.get("body").asText());
                 }
             }
+            return builder.build();
         }
-        return builder.build();
+        return null;
     }
 
     private void postToDiscord(final String msg, final URI uri) throws IOException, InterruptedException {
