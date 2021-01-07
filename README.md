@@ -21,9 +21,9 @@ Peregine plans on eventually offering monitoring of the following data sources u
 ### Available Monitoring Integrations
 Exchange      | REST API                 | Websocket API            | StatusPage
 ------------- | ------------------------ | ------------------------ | -----------------------
-Coinbase      | <kbd>N/A</kbd>           | <kbd>N/A</kbd>           | <kbd>N/A</kbd>
+Coinbase      | <kbd>N/A</kbd>           | <kbd>N/A</kbd>           | <kbd>[Coinbase StatusPage](http://status.coinbase.com/)</kbd>
 Kraken        | <kbd>N/A</kbd>           | <kbd>N/A</kbd>           | <kbd>[Kraken StatusPage](https://status.kraken.com/)</kbd>
 Binance       | <kbd>N/A</kbd>           | <kbd>N/A</kbd>           | <kbd>Unsupported</kbd>
-Bitfinex      | <kbd>N/A</kbd>           | <kbd>N/A</kbd>           | <kbd>N/A</kbd>
-Bitmex        | <kbd>N/A</kbd>           | <kbd>N/A</kbd>           | <kbd>N/A</kbd>
-Huobi         | <kbd>N/A</kbd>           | <kbd>N/A</kbd>           | <kbd>N/A</kbd>
+Bitfinex      | <kbd>N/A</kbd>           | <kbd>N/A</kbd>           | <kbd>[Bitfinex StatusPage](https://bitfinex.statuspage.io/)</kbd>
+Bitmex        | <kbd>N/A</kbd>           | <kbd>N/A</kbd>           | <kbd>[Bitmex StatusPage](https://status.bitmex.com/)</kbd>
+Huobi         | <kbd>N/A</kbd>           | <kbd>N/A</kbd>           | <kbd>[Huobi StatusPage](https://status.huobigroup.com/)</kbd>
