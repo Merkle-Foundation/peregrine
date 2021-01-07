@@ -1,3 +1,5 @@
+![alt text](http://clipart-library.com/new_gallery/falcon-clipart-39.gif)
+
 # Peregrine
 The source code for a crypto exchange and blockchain monitoring platform
 
