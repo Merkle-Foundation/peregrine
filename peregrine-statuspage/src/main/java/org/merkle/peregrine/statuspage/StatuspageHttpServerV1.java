@@ -83,7 +83,7 @@ public class StatuspageHttpServerV1 extends AbstractVerticle {
             ctx.response()
                     .putHeader("Content-Type", "application/json")
                     .setStatusCode(200)
-                    .end("{ \"Result\" : \"POST Message Consumed\" }");
+                    .end("{ \"Result\" : \"StatusPage update consumed\" }");
         });
     }
 
