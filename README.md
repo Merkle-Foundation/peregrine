@@ -7,7 +7,7 @@ Peregine plans on eventually offering monitoring of the following data sources u
 - [ ] REST APIs
 - [ ] Websocket APIs
 - [ ] [StatusPage](https://www.atlassian.com/software/statuspage)
-- [ ] [Blockchain Integration]
+- [ ] Blockchain
 
 ### Subscription Integration
 - [ ] Email
