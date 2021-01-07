@@ -17,11 +17,11 @@ Peregine plans on eventually offering monitoring of the following data sources u
 - [ ] [Discord](https://discord.com/)
 
 ### Available Integrations
-Exchange      | REST API      | Websocket API | StatusPage
-------------- | ------------- | ------------- | -------------
-Coinbase      | N/A           | N/A           | N/A
-Kraken        | N/A           | N/A           | N/A
-Binance       | N/A           | N/A           | Unsupported
-Bitfinex      | N/A           | N/A           | N/A
-Bitmex        | N/A           | N/A           | N/A
-Huobi         | N/A           | N/A           | N/A
+Exchange      | REST API                 | Websocket API            | StatusPage
+------------- | ------------------------ | ------------------------ | -----------------------
+Coinbase      | <kbd>N/A</kbd>           | <kbd>N/A</kbd>           | <kbd>N/A</kbd>
+Kraken        | <kbd>N/A</kbd>           | <kbd>N/A</kbd>           | <kbd>N/A</kbd>
+Binance       | <kbd>N/A</kbd>           | <kbd>N/A</kbd>           | <kbd>Unsupported</kbd>
+Bitfinex      | <kbd>N/A</kbd>           | <kbd>N/A</kbd>           | <kbd>N/A</kbd>
+Bitmex        | <kbd>N/A</kbd>           | <kbd>N/A</kbd>           | <kbd>N/A</kbd>
+Huobi         | <kbd>N/A</kbd>           | <kbd>N/A</kbd>           | <kbd>N/A</kbd>
