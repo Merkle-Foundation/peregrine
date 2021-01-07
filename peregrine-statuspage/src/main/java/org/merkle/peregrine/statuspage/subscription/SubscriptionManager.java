@@ -14,7 +14,7 @@ import java.io.StringWriter;
 
 import static org.merkle.peregrine.statuspage.Routes.CREATE_SUBSCRIPTION_VERTX_V1;
 
-public class SubscriptionConsumer extends AbstractVerticle {
+public class SubscriptionManager extends AbstractVerticle {
 
     private final ObjectMapper mapper = new ObjectMapper();
 
