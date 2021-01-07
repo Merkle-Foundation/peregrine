@@ -1,5 +1,5 @@
-# peregrine
-A crypto exchange and blockchain monitoring platform
+# Peregrine
+The source code for a crypto exchange and blockchain monitoring platform
 
 ## Some data sources
 ###Coinbase
