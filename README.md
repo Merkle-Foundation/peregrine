@@ -22,7 +22,7 @@ Peregine plans on eventually offering monitoring of the following data sources u
 Exchange      | REST API                 | Websocket API            | StatusPage
 ------------- | ------------------------ | ------------------------ | -----------------------
 Coinbase      | <kbd>N/A</kbd>           | <kbd>N/A</kbd>           | <kbd>N/A</kbd>
-Kraken        | <kbd>N/A</kbd>           | <kbd>N/A</kbd>           | <kbd>N/A</kbd>
+Kraken        | <kbd>N/A</kbd>           | <kbd>N/A</kbd>           | <kbd>[Kraken StatusPage](https://status.kraken.com/)</kbd>
 Binance       | <kbd>N/A</kbd>           | <kbd>N/A</kbd>           | <kbd>Unsupported</kbd>
 Bitfinex      | <kbd>N/A</kbd>           | <kbd>N/A</kbd>           | <kbd>N/A</kbd>
 Bitmex        | <kbd>N/A</kbd>           | <kbd>N/A</kbd>           | <kbd>N/A</kbd>
