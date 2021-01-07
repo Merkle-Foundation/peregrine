@@ -1,11 +1,11 @@
 package org.merkle.peregrine.statuspage.subscription;
 
 public enum SubscriptionMedium {
-    Email,
-    Text,
-    Discord,
-    Slack,
-    PagerDuty;
+    EMAIL,
+    TEXT,
+    DISCORD,
+    SLACK,
+    PAGERDUTY;
 
     public static SubscriptionMedium getValue(final String subscriptionMedium) {
         try {

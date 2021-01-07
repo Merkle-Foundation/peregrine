@@ -3,7 +3,7 @@ package org.merkle.peregrine.statuspage.subscription;
 public enum SubscriptionTopic {
     REST,
     WS,
-    StatusPage;
+    STATUSPAGE;
 
     public static SubscriptionTopic getValue(final String subscriptionTopic) {
         try {

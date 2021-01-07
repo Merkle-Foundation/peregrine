@@ -7,6 +7,8 @@ import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.eventbus.Message;
+import io.vertx.core.json.JsonObject;
+import io.vertx.core.shareddata.LocalMap;
 import org.merkle.peregrine.core.Exchange;
 
 import java.io.PrintWriter;
@@ -23,6 +25,24 @@ public class SubscriptionManager extends AbstractVerticle {
         vertx.eventBus().consumer(CREATE_SUBSCRIPTION_VERTX_V1, this::processMessage);
     }
 
+    /**
+     * Builds the name which uniquely identifies a subscription
+     *
+     * @param topic of subscription
+     * @param medium of subscription
+     * @param exchange for subscription
+     */
+    public static String composeSubscriptionName(final SubscriptionTopic topic,
+                                                 final SubscriptionMedium medium,
+                                                 final Exchange exchange) {
+        return medium.name().toLowerCase() + "_" + topic.name().toLowerCase() + "_" + exchange.name().toLowerCase();
+    }
+
+    /**
+     * Processes request for a new subscription
+     *
+     * @param message containing subscription request details
+     */
     private void processMessage(final Message<?> message) {
 
         try {
@@ -31,12 +51,22 @@ public class SubscriptionManager extends AbstractVerticle {
                 return;
             }
             final Exchange exchange = Exchange.getValue(msg.get("exchange").asText().toUpperCase());
-            final SubscriptionTopic topic = SubscriptionTopic.getValue(msg.get("topic").asText());
-            final SubscriptionMedium medium = SubscriptionMedium.getValue(msg.get("medium").asText());
+            final SubscriptionTopic topic = SubscriptionTopic.getValue(msg.get("topic").asText().toUpperCase());
+            final SubscriptionMedium medium = SubscriptionMedium.getValue(msg.get("medium").asText().toUpperCase());
             final String medium_value = msg.get("medium_value").asText();
 
             final String result = String.format("Subscribed [%s] via [%s] for exchange [%s] and topic [%s] ",
                     medium_value, medium, exchange, topic);
+
+            final String mapName = composeSubscriptionName(topic, medium, exchange);
+            final LocalMap<String, JsonObject> map = vertx.sharedData().getLocalMap(mapName);
+            final JsonObject subscribers = map.computeIfAbsent(mapName, s -> new JsonObject());
+            if (subscribers.containsKey(medium_value)) {
+                successResponse(message, String.format("[%s] already has [%s] as a subscriber",
+                        mapName.toUpperCase(), medium_value));
+                return;
+            }
+            subscribers.put(medium_value, medium_value);
 
             successResponse(message, result);
         } catch (JsonProcessingException e) {
@@ -48,12 +78,19 @@ public class SubscriptionManager extends AbstractVerticle {
         }
     }
 
+    /**
+     * Validates if a subscription body has all required details
+     *
+     * @param message to respond to
+     * @param msg body of request
+     * @return if valid
+     */
     private boolean validSubscription(final Message<?> message, final JsonNode msg) {
         if (!msg.has("medium")) {
             errorResponse(message, "Missing the subscription [medium]");
             return false;
         }
-        final SubscriptionMedium medium = SubscriptionMedium.getValue(msg.get("medium").asText());
+        final SubscriptionMedium medium = SubscriptionMedium.getValue(msg.get("medium").asText().toUpperCase());
         if (medium == null) {
             errorResponse(message, "Invalid subscription [medium]");
             return false;
@@ -66,7 +103,7 @@ public class SubscriptionManager extends AbstractVerticle {
             errorResponse(message, "Missing the subscription [topic]");
             return false;
         }
-        final SubscriptionTopic topic = SubscriptionTopic.getValue(msg.get("topic").asText());
+        final SubscriptionTopic topic = SubscriptionTopic.getValue(msg.get("topic").asText().toUpperCase());
         if (topic == null) {
             errorResponse(message, "Invalid subscription [topic]");
             return false;
