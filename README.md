@@ -9,11 +9,11 @@ Peregine plans on eventually offering monitoring of the following data sources u
 - [ ] [StatusPage](https://www.atlassian.com/software/statuspage)
 
 ### Subscription Integration
-- [] Email
-- [] Text
-- [] PagerDuty
-- [] Slack
-- [] Discord
+- [ ] Email
+- [ ] Text
+- [ ] [PagerDuty](https://www.pagerduty.com/)
+- [ ] [Slack](https://slack.com/)
+- [ ] [Discord](https://discord.com/)
 
 ## Some data sources
 ###Coinbase
