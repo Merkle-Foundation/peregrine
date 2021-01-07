@@ -7,8 +7,7 @@ Peregine plans on eventually offering monitoring of the following data sources u
 - [ ] REST APIs
 - [ ] Websocket APIs
 - [ ] [StatusPage](https://www.atlassian.com/software/statuspage)
-- [ ] [Bitcoin Core](https://bitcoin.org/en/bitcoin-core/)
-- [ ] [Ethereum](https://ethereum.org/en/)
+- [ ] [Blockchain Integration]
 
 ### Subscription Integration
 - [ ] Email
