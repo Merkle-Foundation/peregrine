@@ -19,9 +19,9 @@ Peregine plans on eventually offering monitoring of the following data sources u
 ### Available Integrations
 Exchange      | REST API      | Websocket API | StatusPage
 ------------- | ------------- | ------------- | -------------
-Coinbase      | [ ]           | [ ]           | [ ]
-Kraken        | [ ]           | [ ]           | [ ]
-Binance       | [ ]           | [ ]           | [ ]
-Bitfinex      | [ ]           | [ ]           | [ ]
-Bitmex        | [ ]           | [ ]           | [ ]
-Huobi         | [ ]           | [ ]           | [ ]
+Coinbase      | N/A           | N/A           | N/A
+Kraken        | N/A           | N/A           | N/A
+Binance       | N/A           | N/A           | Unsupported
+Bitfinex      | N/A           | N/A           | N/A
+Bitmex        | N/A           | N/A           | N/A
+Huobi         | N/A           | N/A           | N/A
