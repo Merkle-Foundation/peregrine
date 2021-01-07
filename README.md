@@ -16,7 +16,7 @@ Peregine plans on eventually offering monitoring of the following data sources u
 - [ ] [Slack](https://slack.com/)
 - [ ] [Discord](https://discord.com/)
 
-### Available Integrations
+### Available Monitoring Integrations
 Exchange      | REST API                 | Websocket API            | StatusPage
 ------------- | ------------------------ | ------------------------ | -----------------------
 Coinbase      | <kbd>N/A</kbd>           | <kbd>N/A</kbd>           | <kbd>N/A</kbd>
