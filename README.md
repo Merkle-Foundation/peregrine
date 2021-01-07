@@ -4,9 +4,9 @@ The source code for a crypto exchange and blockchain monitoring platform
 ## Monitoring
 Peregine plans on eventually offering monitoring of the following data sources using various integrations:
 ### Data Sources:
-- [] REST APIs
-- [] Websocket APIs
-- [] [StatusPage](https://www.atlassian.com/software/statuspage)
+- [ ] REST APIs
+- [ ] Websocket APIs
+- [ ] [StatusPage](https://www.atlassian.com/software/statuspage)
 
 ### Subscription Integration
 - [] Email
